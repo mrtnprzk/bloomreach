@@ -1,30 +1,21 @@
-import React, { useEffect } from 'react';
-import axios from "axios";
+import React from "react";
+import { useEvents } from "./context/EventsContext";
 
 function App() {
-
-  const getEvents = async () => {
-    try {
-      const response = await axios.get(
-        "https://customer-events.herokuapp.com"
-      );
-      console.log(response.data);
-      
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    getEvents()
-  }, [])
   
+  const {eventsData, isLoadingEvents} = useEvents()
+
+  if (isLoadingEvents) return <h1 className="text-3xl font-bold underline">Loading!</h1>
 
   return (
-    <div >
+    <div>
       <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+        {
+          eventsData.map((event: any, i: any) => (
+            <p key={i}>{event.type}</p>
+          ))
+        }
+      </h1>
     </div>
   );
 }
