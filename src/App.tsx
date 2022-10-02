@@ -1,23 +1,14 @@
 import React from "react";
+import Form from "./components/Form";
 import { useEvents } from "./context/EventsContext";
 
 function App() {
-  
-  const {eventsData, isLoadingEvents} = useEvents()
+  const { isLoadingEvents } = useEvents();
 
-  if (isLoadingEvents) return <h1 className="text-3xl font-bold underline">Loading!</h1>
+  if (isLoadingEvents)
+    return <h1 className="text-3xl text-center pt-32">Loading!</h1>;
 
-  return (
-    <div>
-      <h1 className="text-3xl font-bold underline">
-        {
-          eventsData.map((event: any, i: any) => (
-            <p key={i}>{event.type}</p>
-          ))
-        }
-      </h1>
-    </div>
-  );
+  return <Form />;
 }
 
 export default App;

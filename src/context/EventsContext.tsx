@@ -13,6 +13,17 @@ export const EventsProvider = ({ children }: EventsContextProps) => {
   const [isLoadingEvents, setIsLoadingEvents] = useState(false);
   console.log(eventsData);
 
+  const methods = [
+    { property: "equals", type: "string" },
+    { property: "does not equal", type: "string" },
+    { property: "contains", type: "string" },
+    { property: "does not contain", type: "string" },
+    { property: "equal to", type: "number" },
+    { property: "in between", type: "number" },
+    { property: "less than", type: "number" },
+    { property: "greater than", type: "number" },
+  ];
+
   const getEvents = async () => {
     setIsLoadingEvents(true);
     try {
@@ -29,7 +40,7 @@ export const EventsProvider = ({ children }: EventsContextProps) => {
   }, []);
 
   return (
-    <EventsContext.Provider value={{ eventsData, isLoadingEvents }}>
+    <EventsContext.Provider value={{ eventsData, isLoadingEvents, methods }}>
       {children}
     </EventsContext.Provider>
   );
